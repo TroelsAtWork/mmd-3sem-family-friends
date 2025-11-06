@@ -9,10 +9,10 @@ const PetList = () => {
           <Image
             loading="eager"
             alt="Cat"
-            src="https://placecats.com/neo/300/200"
+            // src="https://placecats.com/neo/300/200"
             width={300}
             height={200}
-            className="hue-rotate-90 -mx-2 -mt-2 mb-2 w-[calc(100%+1rem)] max-w-none rounded-t-2xl"
+            className="-mx-2 -mt-2 mb-2 w-[calc(100%+1rem)] max-w-none rounded-t-2xl"
           />
           <div className="font-semibold font-stretch-extra-condensed tracking-wide">
             Kælenavn
