@@ -4,18 +4,19 @@ import Image from "next/image";
 const PetList = () => {
   return (
     <>
-      <Link href="/details/1">
-        <div className="shadow-md p-2 rounded-2xl">
+      <Link href="/detalje">
+        <div className="shadow-md p-4 rounded-2xl">
           <Image
             loading="eager"
             alt="Cat"
-            // src="https://placecats.com/neo/300/200"
+            src="https://placecats.com/neo/300/200"
             width={300}
             height={200}
-            className="-mx-2 -mt-2 mb-2 w-[calc(100%+1rem)] max-w-none rounded-t-2xl"
+            className="-mx-4 -mt-4 mb-4 w-[calc(100%+2rem)] max-w-none rounded-2xl"
           />
-          <div className="font-semibold font-stretch-extra-condensed tracking-wide">
-            Kælenavn
+          <div className="font-black font-stretch-extra-condensed tracking-wide flex justify-between">
+            <p>Kælenavn</p>
+            <p>2,5år</p>
           </div>
         </div>
       </Link>

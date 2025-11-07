@@ -1,5 +1,11 @@
+import Link from "next/link";
+
 const detalje = () => {
-  return <h1>Detaljeside:</h1>;
+  return (
+    <Link href="/">
+      <h1>Detaljeside:</h1>
+    </Link>
+  );
 };
 
 export default detalje;

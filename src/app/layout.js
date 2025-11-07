@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        // suppressHydrationWarning
+        suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
         <header className="flex h-6 mb-13 mt-3 fixed top-0 left-0 right-0">
