@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const ProductList = () => {
   return (
-    <Suspense>
+    <Suspense fallback={<div>Loading products...</div>}>
       <FetchProduct />
     </Suspense>
   );
