@@ -6,11 +6,11 @@ export default async function details({ params }) {
   const response = await fetch(`https://dummyjson.com/products/${id}`);
   const product = await response.json();
   return (
-    <Suspense>
+    <Suspense fallback={<div>Loading products...</div>}>
       <div className="flex justify-center">
         <Image
           loading="eager"
-          alt={product.brand ? product.brand : "Product Image"}
+          alt="Product Image"
           src={product.thumbnail}
           width={300}
           height={200}
@@ -19,20 +19,3 @@ export default async function details({ params }) {
     </Suspense>
   );
 }
-
-// const FetchProduct = async ({ id }) => {
-//   const response = await fetch(`https://dummyjson.com/products/${id}`);
-//   const product = await response.json();
-//   console.log(product);
-//   return (
-//     <div className="flex justify-center">
-//       <Image
-//         loading="eager"
-//         alt={product.brand ? product.brand : "Product Image"}
-//         src={product.thumbnail}
-//         width={300}
-//         height={200}
-//       />
-//     </div>
-//   );
-// };

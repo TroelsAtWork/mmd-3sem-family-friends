@@ -1,35 +1,30 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Loading from "@/app/Loading";
 
 const ProductList = () => {
   return (
-    <Suspense fallback={<Loading />}>
+    <Suspense>
       <FetchProduct />
     </Suspense>
   );
 };
 
-// FetchProduct component to fetch and display products
-
 const FetchProduct = async () => {
+  "use server";
   const response = await fetch("https://dummyjson.com/products");
   const { products } = await response.json();
-
   return products.map((product) => (
     <Link href={`/details/${product.id}`} key={product.id}>
       <div>
         <Image
           loading="eager"
-          alt="Product Image"
+          alt={product.brand ? product.brand : "Product Image"}
           src={product.thumbnail}
           width={300}
           height={200}
         />
-        <div className="text-center">
-          {product.brand ? product.brand : "Unknown Brand"}
-        </div>
+        <div className="text-center">{product.brand}</div>
       </div>
     </Link>
   ));
