@@ -2,7 +2,11 @@ import Image from "next/image";
 import { Suspense } from "react";
 
 export default function details({ params }) {
-  return <FetchProduct params={params} />;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <FetchProduct params={params} />
+    </Suspense>
+  );
 }
 
 async function FetchProduct({ params }) {
