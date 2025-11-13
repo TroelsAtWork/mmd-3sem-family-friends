@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import FavoritElement from "./FavoritElement";
 
 const ProductList = ({ category }) => {
   return (
@@ -15,12 +16,13 @@ const FetchProduct = async ({ category }) => {
   const url = category
     ? `https://dummyjson.com/products/category/${category}`
     : "https://dummyjson.com/products";
-    
+
   const response = await fetch(url);
   const { products } = await response.json();
   return products.map((product) => (
-    <Link href={`/details/${product.id}`} key={product.id}>
-      <div>
+    <div key={product.id}>
+      <FavoritElement id={product.id} />
+      <Link href={`/details/${product.id}`}>
         <Image
           loading="eager"
           alt={product.brand ? product.brand : "Product Image"}
@@ -29,8 +31,8 @@ const FetchProduct = async ({ category }) => {
           height={200}
         />
         <div className="text-center">{product.brand}</div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   ));
 };
 

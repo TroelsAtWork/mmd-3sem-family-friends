@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Suspense } from "react";
+import FavoritElement from "@/components/FavoritElement";
 
 export default function details({ params }) {
   return (
@@ -15,6 +16,7 @@ async function FetchProduct({ params }) {
   const product = await response.json();
   return (
     <div className="flex justify-center">
+      <FavoritElement id={product.id} />
       <Image
         loading="eager"
         alt={product.brand ? product.brand : "Product Image"}
