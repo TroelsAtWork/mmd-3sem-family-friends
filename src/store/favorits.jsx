@@ -1,6 +1,10 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+// HUSK AT INSTALLERE ZUSTAND MED: npm install zustand For at kunne bruge denne store!
+// HUSK AT INSTALLERE ZUSTAND MED: npm install zustand For at kunne bruge denne store!
+// HUSK AT INSTALLERE ZUSTAND MED: npm install zustand For at kunne bruge denne store!
+
 const useStore = create(
   persist(
     (set, get) => ({
