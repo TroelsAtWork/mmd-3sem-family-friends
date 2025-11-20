@@ -5,6 +5,5 @@ export const submitProduct = async (prevState, formData) => {
   if (!productname || productname.length < 3) {
     error.productname = "Product name must be at least 3 characters long.";
   }
-  if(productname.)
   return { error, productname };
 };
