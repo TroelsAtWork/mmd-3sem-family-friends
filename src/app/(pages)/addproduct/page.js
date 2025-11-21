@@ -21,6 +21,15 @@ const addProduct = () => {
           defaultValue={state.productName}
           className="border-1 p-1"
         />
+        {state.error?.productPrice && (
+          <p className="text-red-500">{state.error.productPrice}</p>
+        )}
+        <input
+          name="productprice"
+          placeholder="Product Price"
+          defaultValue={state.productPrice}
+          className="border-1 p-1"
+        />
         <button type="submit" className="border-1 p-1 ml-1">
           Add Product
         </button>
