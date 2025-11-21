@@ -1,14 +1,33 @@
 "use server";
 export const submitProduct = async (prevState, formData) => {
-  const error = {};
   const productName = formData.get("productname");
+
+  const state = {
+    success: null,
+    errors: {},
+    fields: {
+      productName,
+    },
+  };
+
   if (!productName) {
-    error.productName = "feltet skal udfyldes";
+    state.errors.productName = "feltet skal udfyldes";
   } else if (productName.length < 5) {
-    error.productName = "feltet skal indeholde mindst 5 tegn";
+    state.errors.productName = "feltet skal indeholde mindst 5 tegn";
   }
-  if (Object.keys(error).length > 0) {
-    return { error, productName };
+
+  if (Object.keys(state.errors).length > 0) {
+    return state;
   }
-  return { succes: true };
+
+  const response = await fetch("https://dummyjson.com/products/add", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      title: productName,
+    }),
+  });
+
+  state.success = response.ok;
+  return state;
 };
