@@ -20,6 +20,7 @@ export const submitProduct = async (prevState, formData) => {
     return state;
   }
 
+  await new Promise((resolve) => setTimeout(resolve, 2000));
   const response = await fetch("https://dummyjson.com/products/add", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
