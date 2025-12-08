@@ -37,6 +37,7 @@ const ProductForm = () => {
     errors: {},
     fields: {},
   });
+  console.log(state);
   return (
     <>
       <ResponseMessage state={state} />
