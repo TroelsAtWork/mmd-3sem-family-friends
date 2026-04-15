@@ -1,17 +1,30 @@
 "use client";
-import useStore from "@/store/favorits";
 import { MdFavoriteBorder } from "react-icons/md";
 import { MdFavorite } from "react-icons/md";
+import useFavorites from "@/store/favorite";
 
-const Favorite = ({ id }) => {
-  const { favorite, toggleFavorite } = useStore();
-  console.log(favorite);
-  if (favorite.includes(id)) {
-    console.log("Favorite:", id);
-    return <MdFavorite onClick={() => toggleFavorite(id)} />;
+const Favorite = ({ id, breed }) => {
+  const { favorites, setFavorite, removeFavorite } = useFavorites();
+  if (favorites.some((favorite) => favorite.id === id)) {
+    return (
+      <MdFavorite
+        size={25}
+        className="cursor-pointer absolute top-3 right-3 text-red-500"
+        onClick={() => {
+          removeFavorite(id);
+        }}
+      />
+    );
   } else {
-    console.log("Not Favorite:", id);
-    return <MdFavoriteBorder onClick={() => toggleFavorite(id)} />;
+    return (
+      <MdFavoriteBorder
+        size={25}
+        className="cursor-pointer absolute top-3 right-3 text-white"
+        onClick={() => {
+          setFavorite(id, breed);
+        }}
+      />
+    );
   }
 };
 
