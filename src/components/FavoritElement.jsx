@@ -1,11 +1,11 @@
-"use client";
+"use client"; //vigtigt!!!
 import useStore from "@/store/favorits";
 import { MdFavoriteBorder } from "react-icons/md";
 import { MdFavorite } from "react-icons/md";
 
 const Favorite = ({ id }) => {
   const { favorite, toggleFavorite } = useStore();
-  console.log(favorite);
+
   if (favorite.includes(id)) {
     console.log("Favorite:", id);
     return (
