@@ -8,7 +8,7 @@ const BreedList = ({ searchParams }) => {
 
 const FetchBreeds = async ({ searchParams }) => {
   "use server";
-  const { query } = await searchParams;
+  const { query, id } = await searchParams;
   const url = query
     ? `https://api.thedogapi.com/v1/breeds/search?q=${query}`
     : "https://api.thedogapi.com/v1/breeds";
@@ -22,7 +22,7 @@ const FetchBreeds = async ({ searchParams }) => {
 
     return breeds.map((breed) => (
       <div key={breed.id} className="relative">
-        <FavoritElement id={breed.id} breed={breed.name} />
+        <FavoritElement id={breed.image.id} breed={breed.name} />
         <Link href={`/details/${breed.id}`}>
           <Image
             loading="eager"

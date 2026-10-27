@@ -1,31 +1,16 @@
 "use client";
 import { MdFavoriteBorder } from "react-icons/md";
 import { MdFavorite } from "react-icons/md";
-import useFavorites from "@/store/favorite";
+import { addFavorite } from "@/app/actions/actions";
 
 const Favorite = ({ id, breed }) => {
-  const { favorites, setFavorite, removeFavorite } = useFavorites();
-  if (favorites.some((favorite) => favorite.id === id)) {
-    return (
-      <MdFavorite
-        size={25}
-        className="cursor-pointer absolute top-3 right-3 text-red-500"
-        onClick={() => {
-          removeFavorite(id);
-        }}
-      />
-    );
-  } else {
-    return (
-      <MdFavoriteBorder
-        size={25}
-        className="cursor-pointer absolute top-3 right-3 text-white"
-        onClick={() => {
-          setFavorite(id, breed);
-        }}
-      />
-    );
-  }
+  return (
+    <MdFavoriteBorder
+      size={25}
+      className="cursor-pointer absolute top-3 right-3 text-white"
+      onClick={() => addFavorite(id)}
+    />
+  );
 };
 
 export default Favorite;
