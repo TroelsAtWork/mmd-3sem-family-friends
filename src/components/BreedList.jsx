@@ -28,9 +28,10 @@ const FetchBreeds = async ({ searchParams }) => {
     await favoritesResponse.json(),
   ]);
 
-  breeds.map((breed) => {
-    const isFavorite = breeds.some(
-      (breed) => favorites.image_id === breed.image.id,
+  return breeds.map((breed) => {
+    const imageId = breed.image.id;
+    const isFavorite = favorites.some(
+      (favorite) => favorite.image_id === imageId,
     );
     return (
       <div key={breed.id} className="relative">
