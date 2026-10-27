@@ -33,12 +33,17 @@ const FetchBreeds = async ({ searchParams }) => {
     const isFavorite = favorites.some(
       (favorite) => favorite.image_id === imageId,
     );
+    const favorite = favorites.find(
+      (favorite) => favorite.image_id === imageId,
+    );
+
     return (
       <div key={breed.id} className="relative">
         <FavoritElement
           id={breed.image.id}
           breed={breed.name}
           isFavorite={isFavorite}
+          favoriteId={favorite?.id}
         />
         <Link href={`/details/${breed.id}`}>
           <Image
@@ -47,7 +52,7 @@ const FetchBreeds = async ({ searchParams }) => {
             src={breed.image.url}
             width={300}
             height={200}
-            className="w-full h-[200px] object-cover rounded-2xl"
+            className="w-full h-52 object-cover rounded-2xl"
           />
           <div className="text-center">{breed.name}</div>
         </Link>

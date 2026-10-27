@@ -10,6 +10,16 @@ export const addFavorite = async (id) => {
       image_id: id,
     }),
   });
-  console.log("response", response);
-  console.log("id", id);
+};
+
+export const removeFavorite = async (favoriteId) => {
+  const response = await fetch(
+    `https://api.thedogapi.com/v1/favourites/${favoriteId}`,
+    {
+      method: "DELETE",
+      headers: {
+        "x-api-key": process.env.API_KEY,
+      },
+    },
+  );
 };

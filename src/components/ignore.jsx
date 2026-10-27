@@ -1,6 +1,6 @@
 "use client";
 import { useActionState } from "react";
-import { submitProduct } from "@/app/action/action";
+import { submitProduct } from "@/app/ignore/action";
 import { useFormStatus } from "react-dom";
 
 const ResponseMessage = ({ state }) => {
