@@ -8,21 +8,24 @@ import { persist } from "zustand/middleware";
 const useStore = create(
   persist(
     (set, get) => ({
-      favorite: [],
-      toggleFavorite: (product) => {
-        const current = get().favorite;
-        const exists = current.includes(product);
+      favorites: [],
+      toggleFavorite: (productId) => {
+        console.log("Product id:", productId);
+        const currentFavorites = get().favorites;
+        const favoriteExists = currentFavorites.includes(productId);
+
         set({
-          favorite: exists
-            ? current.filter((fav) => fav !== product) // Remove if exists
-            : [...current, product], // Add if doesn't exist
+          favorites: favoriteExists
+            ? currentFavorites.filter((favoriteId) => favoriteId !== productId) // Remove if exists.
+            : [...currentFavorites, productId], // Add if doesn't exist
         });
+        console.log("Updated favorites:", get().favorite);
       },
     }),
     {
       name: "favorite-storage",
-    }
-  )
+    },
+  ),
 );
 
 export default useStore;

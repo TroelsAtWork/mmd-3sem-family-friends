@@ -4,10 +4,9 @@ import { MdFavoriteBorder } from "react-icons/md";
 import { MdFavorite } from "react-icons/md";
 
 const Favorite = ({ id }) => {
-  const { favorite, toggleFavorite } = useStore();
+  const { favorites, toggleFavorite } = useStore();
 
-  if (favorite.includes(id)) {
-    console.log("Favorite:", id);
+  if (favorites.includes(id)) {
     return (
       <MdFavorite
         className="mb-1 cursor-pointer"
@@ -15,7 +14,6 @@ const Favorite = ({ id }) => {
       />
     );
   } else {
-    console.log("Not Favorite:", id);
     return (
       <MdFavoriteBorder
         className="mb-1 cursor-pointer"
