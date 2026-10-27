@@ -29,22 +29,33 @@ const FetchBreeds = async ({ searchParams }) => {
     favoritesResponse.json(),
   ]);
 
-  return breeds.map((breed) => (
-    <div key={breed.id} className="relative">
-      <FavoritElement id={breed.image.id} breed={breed.name} />
-      <Link href={`/details/${breed.id}`}>
-        <Image
-          loading="eager"
-          alt={breed.name ? breed.name : "Image of dog"}
-          src={breed.image.url}
-          width={300}
-          height={200}
-          className="w-full h-[200px] object-cover rounded-2xl"
+  return breeds.map((breed) => {
+    const imageId = breed.image?.id;
+    const isFavorite = favorites.some(
+      (favorite) => favorite.image_id === imageId,
+    );
+
+    return (
+      <div key={breed.id} className="relative">
+        <FavoritElement
+          id={imageId}
+          breed={breed.name}
+          isFavorite={isFavorite}
         />
-        <div className="text-center">{breed.name}</div>
-      </Link>
-    </div>
-  ));
+        <Link href={`/details/${breed.id}`}>
+          <Image
+            loading="eager"
+            alt={breed.name || "Image of dog"}
+            src={breed.image.url}
+            width={300}
+            height={200}
+            className="w-full h-[200px] object-cover rounded-2xl"
+          />
+          <div className="text-center">{breed.name}</div>
+        </Link>
+      </div>
+    );
+  });
 };
 
 export default BreedList;
