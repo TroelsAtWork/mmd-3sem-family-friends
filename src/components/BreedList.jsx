@@ -12,17 +12,33 @@ const FetchBreeds = async ({ searchParams }) => {
   const url = query
     ? `https://api.thedogapi.com/v1/breeds/search?q=${query}`
     : "https://api.thedogapi.com/v1/breeds";
-  try {
-    const response = await fetch(url, {
-      headers: {
-        "x-api-key": process.env.API_KEY,
-      },
-    });
-    const breeds = await response.json();
+  const headers = {
+    headers: {
+      "x-api-key": process.env.API_KEY,
+    },
+  };
 
-    return breeds.map((breed) => (
+  const [breedsResponse, favoritesResponse] = await Promise.all([
+    await fetch(url, headers),
+    await fetch("https://api.thedogapi.com/v1/favourites", headers),
+  ]);
+
+  const [breeds, favorites] = await Promise.all([
+    await breedsResponse.json(),
+    await favoritesResponse.json(),
+  ]);
+
+  breeds.map((breed) => {
+    const isFavorite = breeds.some(
+      (breed) => favorites.image_id === breed.image.id,
+    );
+    return (
       <div key={breed.id} className="relative">
-        <FavoritElement id={breed.image.id} breed={breed.name} />
+        <FavoritElement
+          id={breed.image.id}
+          breed={breed.name}
+          isFavorite={isFavorite}
+        />
         <Link href={`/details/${breed.id}`}>
           <Image
             loading="eager"
@@ -35,10 +51,8 @@ const FetchBreeds = async ({ searchParams }) => {
           <div className="text-center">{breed.name}</div>
         </Link>
       </div>
-    ));
-  } catch (error) {
-    return <p>Ingen internet forbindelse eller API utilgængeligt</p>;
-  }
+    );
+  });
 };
 
 export default BreedList;
