@@ -8,10 +8,20 @@ const Favorite = ({ id }) => {
   console.log(favorite);
   if (favorite.includes(id)) {
     console.log("Favorite:", id);
-    return <MdFavorite onClick={() => toggleFavorite(id)} />;
+    return (
+      <MdFavorite
+        className="mb-1 cursor-pointer"
+        onClick={() => toggleFavorite(id)}
+      />
+    );
   } else {
     console.log("Not Favorite:", id);
-    return <MdFavoriteBorder onClick={() => toggleFavorite(id)} />;
+    return (
+      <MdFavoriteBorder
+        className="mb-1 cursor-pointer"
+        onClick={() => toggleFavorite(id)}
+      />
+    );
   }
 };
 
