@@ -1,4 +1,6 @@
 "use server";
+import { refresh } from "next/cache";
+
 export const addFavorite = async (id) => {
   const response = await fetch("https://api.thedogapi.com/v1/favourites", {
     method: "POST",
@@ -10,6 +12,10 @@ export const addFavorite = async (id) => {
       image_id: id,
     }),
   });
+  if (!response.ok) {
+    throw new Error(`Could not add favorite: ${response.status}`);
+  }
+  refresh();
 };
 
 export const removeFavorite = async (favoriteId) => {
@@ -22,4 +28,8 @@ export const removeFavorite = async (favoriteId) => {
       },
     },
   );
+  if (!response.ok) {
+    throw new Error(`Could not delete favorite: ${response.status}`);
+  }
+  refresh();
 };

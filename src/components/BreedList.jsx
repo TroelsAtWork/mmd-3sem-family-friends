@@ -7,7 +7,6 @@ const BreedList = ({ searchParams }) => {
 };
 
 const FetchBreeds = async ({ searchParams }) => {
-  "use server";
   const { query, id } = await searchParams;
   const url = query
     ? `https://api.thedogapi.com/v1/breeds/search?q=${query}`
@@ -16,11 +15,12 @@ const FetchBreeds = async ({ searchParams }) => {
     headers: {
       "x-api-key": process.env.API_KEY,
     },
+    cache: "no-store",
   };
 
   const [breedsResponse, favoritesResponse] = await Promise.all([
-    await fetch(url, headers),
-    await fetch("https://api.thedogapi.com/v1/favourites", headers),
+    await fetch(url, { ...headers }),
+    await fetch("https://api.thedogapi.com/v1/favourites", { ...headers }),
   ]);
 
   const [breeds, favorites] = await Promise.all([
@@ -31,9 +31,11 @@ const FetchBreeds = async ({ searchParams }) => {
   return breeds.map((breed) => {
     const imageId = breed.image.id;
     const isFavorite = favorites.some(
+      //boolian bruges til at vise det korrekte favorite ikon
       (favorite) => favorite.image_id === imageId,
     );
     const favorite = favorites.find(
+      //id bruges af removeFavorite
       (favorite) => favorite.image_id === imageId,
     );
 
