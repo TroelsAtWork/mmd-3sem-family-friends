@@ -1,6 +1,6 @@
 "use server";
 export const addFavorite = async (id) => {
-  const response = await fetch("https://api.thedogapi.com/v1/favourites", {
+  const response = await fetch("https://api.thedogapi.com/v1/favouritess", {
     method: "POST",
     headers: {
       "x-api-key": process.env.API_KEY,
@@ -10,9 +10,16 @@ export const addFavorite = async (id) => {
       image_id: id,
     }),
   });
+  if (!response.ok) {
+    throw new Error(`Could not remove favorite: ${response.status}`);
+  }
 };
 
-export const removeFavorite = async (favoriteId) => {
+export const removeFavorite = async (
+  favoriteId,
+  setIsFavoriteClient,
+  isFavorite,
+) => {
   const response = await fetch(
     `https://api.thedogapi.com/v1/favourites/${favoriteId}`,
     {
@@ -22,4 +29,7 @@ export const removeFavorite = async (favoriteId) => {
       },
     },
   );
+  if (!response.ok) {
+    throw new Error(`Could not remove favorite: ${response.status}`);
+  }
 };
